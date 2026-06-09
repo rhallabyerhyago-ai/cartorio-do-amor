@@ -988,7 +988,7 @@
 <div class="cta-section show-on-success">
   <div class="download-actions">
     <button class="download-btn" id="download-pdf">Baixar PDF (A4)</button>
-    <button class="download-btn secondary" id="download-story">Baixar pro story (1080)</button>
+    <button class="download-btn secondary" id="download-story">Baixar pro story (vertical)</button>
   </div>
   <div class="cta-micro" style="margin-top: 24px;">
     <span>Edite os campos acima e clique em baixar de novo se quiser ajustar</span>
@@ -1324,34 +1324,101 @@
       btnStory.textContent = 'Gerando...';
       btnStory.disabled = true;
       try {
-        const canvas = await captureCertificate(2.5);
-        
-        // Cria canvas quadrado 1080x1080 com fundo
-        const squareCanvas = document.createElement('canvas');
-        squareCanvas.width = 1080;
-        squareCanvas.height = 1080;
-        const ctx = squareCanvas.getContext('2d');
-        
-        // Fundo
+        // Aguarda fontes carregarem pra renderizar consistente
+        if (document.fonts && document.fonts.ready) {
+          await document.fonts.ready;
+        }
+
+        const certCanvas = await captureCertificate(2.5);
+
+        // Canvas vertical 1080x1920 (formato Stories Instagram)
+        const W = 1080, H = 1920;
+        const storyCanvas = document.createElement('canvas');
+        storyCanvas.width = W;
+        storyCanvas.height = H;
+        const ctx = storyCanvas.getContext('2d');
+
+        // Fundo papel
         ctx.fillStyle = '#F2EBD9';
-        ctx.fillRect(0, 0, 1080, 1080);
-        
-        // Desenha o certificado centralizado e dimensionado
-        const certRatio = canvas.width / canvas.height;
-        const targetWidth = 980;
-        const targetHeight = targetWidth / certRatio;
-        const offsetX = (1080 - targetWidth) / 2;
-        const offsetY = (1080 - targetHeight) / 2;
-        
-        ctx.drawImage(canvas, offsetX, offsetY, targetWidth, targetHeight);
-        
+        ctx.fillRect(0, 0, W, H);
+
+        // Textura sutil radial (canto superior)
+        const grad1 = ctx.createRadialGradient(W * 0.15, H * 0.1, 0, W * 0.15, H * 0.1, W * 0.6);
+        grad1.addColorStop(0, 'rgba(168, 124, 46, 0.06)');
+        grad1.addColorStop(1, 'rgba(168, 124, 46, 0)');
+        ctx.fillStyle = grad1;
+        ctx.fillRect(0, 0, W, H);
+
+        // Textura sutil radial (canto inferior)
+        const grad2 = ctx.createRadialGradient(W * 0.85, H * 0.9, 0, W * 0.85, H * 0.9, W * 0.6);
+        grad2.addColorStop(0, 'rgba(168, 54, 42, 0.05)');
+        grad2.addColorStop(1, 'rgba(168, 54, 42, 0)');
+        ctx.fillStyle = grad2;
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.textAlign = 'center';
+
+        // === TOPO: eyebrow ===
+        ctx.fillStyle = '#A8362A';
+        ctx.font = '500 26px "JetBrains Mono", ui-monospace, monospace';
+        ctx.textBaseline = 'top';
+        ctx.fillText('EDIÇÃO  2026  ·  DIA DOS NAMORADOS', W / 2, 180);
+
+        // Linha decorativa
+        ctx.strokeStyle = '#1A1612';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(W * 0.28, 240);
+        ctx.lineTo(W * 0.72, 240);
+        ctx.stroke();
+
+        // === CENTRO: certificado com sombra ===
+        const certWidth = 1000;
+        const certRatio = certCanvas.width / certCanvas.height;
+        const certHeight = certWidth / certRatio;
+        const certX = (W - certWidth) / 2;
+        const certY = 340;
+
+        ctx.shadowColor = 'rgba(26, 22, 18, 0.18)';
+        ctx.shadowBlur = 50;
+        ctx.shadowOffsetY = 24;
+        ctx.drawImage(certCanvas, certX, certY, certWidth, certHeight);
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetY = 0;
+
+        // === EMBAIXO: branding ===
+        const brandY = certY + certHeight + 130;
+
+        ctx.fillStyle = '#1A1612';
+        ctx.font = '400 84px "DM Serif Display", Georgia, serif';
+        ctx.textBaseline = 'top';
+        ctx.fillText('Cartório do Amor', W / 2, brandY);
+
+        ctx.fillStyle = '#4A3F33';
+        ctx.font = 'italic 400 40px "DM Serif Display", Georgia, serif';
+        ctx.fillText('emita o seu em 30 segundos', W / 2, brandY + 120);
+
+        // Linha curta antes do CTA
+        ctx.strokeStyle = '#A8362A';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(W / 2 - 40, brandY + 220);
+        ctx.lineTo(W / 2 + 40, brandY + 220);
+        ctx.stroke();
+
+        // URL CTA
+        ctx.fillStyle = '#A8362A';
+        ctx.font = '500 30px "JetBrains Mono", ui-monospace, monospace';
+        ctx.fillText('cartorio-do-amor.vercel.app', W / 2, brandY + 260);
+
         // Download
         const link = document.createElement('a');
         link.download = `certificado-story-${(state.name || 'meu-amor').replace(/[^a-z0-9]/gi, '-').toLowerCase()}.jpg`;
-        link.href = squareCanvas.toDataURL('image/jpeg', 0.95);
+        link.href = storyCanvas.toDataURL('image/jpeg', 0.95);
         link.click();
-        
-        btnStory.textContent = 'Baixar pro story (1080)';
+
+        btnStory.textContent = 'Baixar pro story (vertical)';
       } catch (err) {
         console.error(err);
         btnStory.textContent = 'Erro — tente de novo';
