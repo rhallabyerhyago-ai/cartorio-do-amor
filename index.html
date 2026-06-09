@@ -790,6 +790,36 @@
     color: var(--paper-pure);
   }
 
+  /* === DEV MODE BANNER === */
+  .dev-banner {
+    background: #FCD34D;
+    color: #78350F;
+    padding: 10px 16px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: none;
+    border-bottom: 1px solid #B45309;
+  }
+  body.dev-mode .dev-banner { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .dev-banner strong { color: #78350F; font-weight: 700; }
+  .dev-reset-btn {
+    background: #78350F;
+    color: #FCD34D;
+    border: none;
+    padding: 4px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .dev-reset-btn:hover { background: #92400E; }
+
   /* === ANIMATIONS === */
   .reveal {
     opacity: 0;
@@ -813,6 +843,12 @@
 <!-- Banner sucesso (aparece após pagamento) -->
 <div class="success-banner">
   ✓ Pagamento confirmado — seu certificado está pronto pra download
+</div>
+
+<!-- Banner DEV (só aparece com ?dev=1 na URL) -->
+<div class="dev-banner">
+  <span>🛠️ <strong>MODO TESTE</strong> · CTA simula compra sem ir pra Cakto</span>
+  <button class="dev-reset-btn" id="dev-reset">↻ Resetar teste</button>
 </div>
 
 <!-- TOP BAR -->
@@ -1143,7 +1179,7 @@
     });
   });
 
-  // CTAs — redireciona pra Cakto
+  // CTAs — redireciona pra Cakto (ou simula sucesso em modo dev)
   function goToCheckout() {
     // Garante que o estado está salvo
     localStorage.setItem('cartorio_state', JSON.stringify(state));
@@ -1152,6 +1188,13 @@
       localStorage.setItem('cartorio_number', generateCertNumber());
     }
     localStorage.setItem('cartorio_date', getFormattedDate());
+
+    // MODO DEV: simula sucesso direto, sem ir pra Cakto
+    if (window.__DEV_MODE__) {
+      window.location.href = window.location.pathname + '?status=success&dev=1';
+      return;
+    }
+
     window.location.href = CAKTO_URL;
   }
   document.getElementById('cta-main').addEventListener('click', e => {
@@ -1168,6 +1211,21 @@
   // ========================
   const urlParams = new URLSearchParams(window.location.search);
   const isSuccess = urlParams.get(SUCCESS_PARAM) === SUCCESS_VALUE;
+  const isDevMode = urlParams.get('dev') === '1';
+
+  // Ativa modo dev (banner + CTA simula compra)
+  if (isDevMode) {
+    window.__DEV_MODE__ = true;
+    document.body.classList.add('dev-mode');
+    // Botão de reset limpa tudo e volta pro modo dev limpo
+    document.getElementById('dev-reset').addEventListener('click', () => {
+      localStorage.removeItem('cartorio_state');
+      localStorage.removeItem('cartorio_number');
+      localStorage.removeItem('cartorio_date');
+      localStorage.removeItem('cartorio_paid');
+      window.location.href = window.location.pathname + '?dev=1';
+    });
+  }
 
   // Recupera dados salvos (independente de sucesso, pra UX consistente)
   try {
