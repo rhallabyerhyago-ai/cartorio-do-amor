@@ -789,6 +789,67 @@
     background: var(--ink);
     color: var(--paper-pure);
   }
+  .download-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: var(--ink);
+  }
+  .download-btn:disabled:hover {
+    transform: none;
+    background: var(--ink);
+  }
+
+  /* === DOWNLOADS COUNTER === */
+  .downloads-info {
+    margin-top: 16px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .downloads-info strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .downloads-info strong.low { color: var(--seal-red); }
+
+  .downloads-exhausted {
+    display: none;
+    margin-top: 20px;
+    padding: 24px 20px;
+    background: var(--paper-pure);
+    border: 1.5px solid var(--seal-red);
+    border-radius: 2px;
+    text-align: center;
+  }
+  .downloads-exhausted.show { display: block; }
+  .downloads-exhausted h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .downloads-exhausted p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .downloads-exhausted a {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper-pure);
+    padding: 12px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .downloads-exhausted a:hover { background: var(--seal-red); }
 
   /* === DEV MODE BANNER === */
   .dev-banner {
@@ -990,7 +1051,15 @@
     <button class="download-btn" id="download-pdf">Baixar PDF (A4)</button>
     <button class="download-btn secondary" id="download-story">Baixar pro story (vertical)</button>
   </div>
-  <div class="cta-micro" style="margin-top: 24px;">
+  <div class="downloads-info">
+    Downloads restantes: <strong id="downloads-counter">5 de 5</strong>
+  </div>
+  <div class="downloads-exhausted" id="downloads-exhausted">
+    <h4>Limite de downloads atingido</h4>
+    <p>Esse certificado tinha 5 emissões. Pra um novo, com outros dados ou pra outra pessoa, faça uma nova compra — leva 30 segundos.</p>
+    <a href="/">Emitir novo certificado</a>
+  </div>
+  <div class="cta-micro" style="margin-top: 20px;">
     <span>Edite os campos acima e clique em baixar de novo se quiser ajustar</span>
   </div>
 </div>
@@ -1223,6 +1292,7 @@
       localStorage.removeItem('cartorio_number');
       localStorage.removeItem('cartorio_date');
       localStorage.removeItem('cartorio_paid');
+      localStorage.removeItem('cartorio_downloads');
       window.location.href = window.location.pathname + '?dev=1';
     });
   }
@@ -1251,19 +1321,46 @@
 
   updateCertificate();
 
-  // Ativa modo success
+  // Ativa modo success APENAS se ?status=success estiver na URL
+  // (não persiste em localStorage pra não vazar acesso depois)
   if (isSuccess) {
     document.body.classList.add('success-mode');
-    // Salva flag de comprado (caso o usuário recarregue sem o param)
-    localStorage.setItem('cartorio_paid', '1');
     // Scroll suave pro certificado
     setTimeout(() => {
       document.querySelector('.certificate-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 300);
-  } else if (localStorage.getItem('cartorio_paid') === '1') {
-    // Se já comprou antes, mantém o modo success
-    document.body.classList.add('success-mode');
   }
+
+  // ========================
+  // CONTADOR DE DOWNLOADS
+  // ========================
+  const MAX_DOWNLOADS = 5;
+  function getDownloadsUsed() {
+    return parseInt(localStorage.getItem('cartorio_downloads') || '0', 10);
+  }
+  function incrementDownloads() {
+    // Em modo dev, não conta
+    if (window.__DEV_MODE__) return;
+    const used = getDownloadsUsed() + 1;
+    localStorage.setItem('cartorio_downloads', used);
+    updateDownloadsUI();
+  }
+  function updateDownloadsUI() {
+    const used = getDownloadsUsed();
+    const remaining = Math.max(0, MAX_DOWNLOADS - used);
+    const counterEl = document.getElementById('downloads-counter');
+    if (counterEl) {
+      counterEl.textContent = remaining + ' de ' + MAX_DOWNLOADS;
+      counterEl.classList.toggle('low', remaining <= 2 && remaining > 0);
+    }
+    if (remaining === 0) {
+      if (btnPDF) btnPDF.disabled = true;
+      if (btnStory) btnStory.disabled = true;
+      const exhausted = document.getElementById('downloads-exhausted');
+      if (exhausted) exhausted.classList.add('show');
+    }
+  }
+  updateDownloadsUI();
 
   // ========================
   // GERAÇÃO DE PDF E IMAGEM
@@ -1290,6 +1387,7 @@
 
   if (btnPDF) {
     btnPDF.addEventListener('click', async () => {
+      if (getDownloadsUsed() >= MAX_DOWNLOADS && !window.__DEV_MODE__) return;
       btnPDF.textContent = 'Gerando...';
       btnPDF.disabled = true;
       try {
@@ -1310,17 +1408,21 @@
         const fileName = `certificado-${(state.name || 'meu-amor').replace(/[^a-z0-9]/gi, '-').toLowerCase()}.pdf`;
         pdf.save(fileName);
         btnPDF.textContent = 'Baixar PDF (A4)';
+        incrementDownloads();
       } catch (err) {
         console.error(err);
         btnPDF.textContent = 'Erro — tente de novo';
       } finally {
-        btnPDF.disabled = false;
+        if (getDownloadsUsed() < MAX_DOWNLOADS || window.__DEV_MODE__) {
+          btnPDF.disabled = false;
+        }
       }
     });
   }
 
   if (btnStory) {
     btnStory.addEventListener('click', async () => {
+      if (getDownloadsUsed() >= MAX_DOWNLOADS && !window.__DEV_MODE__) return;
       btnStory.textContent = 'Gerando...';
       btnStory.disabled = true;
       try {
@@ -1419,11 +1521,14 @@
         link.click();
 
         btnStory.textContent = 'Baixar pro story (vertical)';
+        incrementDownloads();
       } catch (err) {
         console.error(err);
         btnStory.textContent = 'Erro — tente de novo';
       } finally {
-        btnStory.disabled = false;
+        if (getDownloadsUsed() < MAX_DOWNLOADS || window.__DEV_MODE__) {
+          btnStory.disabled = false;
+        }
       }
     });
   }
