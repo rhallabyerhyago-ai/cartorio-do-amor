@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Certificado Oficial de Melhor Namorada(o). Edição Dia dos Namorados 2026. Emissão imediata por R$ 14,90.">
+<meta property="og:title" content="Certificado Oficial de Melhor Namorada(o) — Cartório do Amor">
+<meta property="og:description" content="Prova material que ela(e) é insubstituível. Emissão em 30 segundos.">
+<meta property="og:type" content="website">
+<title>Cartório do Amor — Certificado Oficial de Melhor Namorada(o)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+  :root {
+    --paper: #F2EBD9;
+    --paper-deep: #E8DFC7;
+    --ink: #1A1612;
+    --ink-soft: #4A3F33;
+    --seal-red: #A8362A;
+    --seal-red-dark: #7E2820;
+    --gold: #A87C2E;
+    --gold-light: #C99B4A;
+    --stamp-green: #2D5B3F;
+    --paper-pure: #FBF7EC;
+    --line: rgba(26, 22, 18, 0.18);
+    --line-soft: rgba(26, 22, 18, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Textura sutil de papel */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(168, 54, 42, 0.02) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(168, 124, 46, 0.025) 0%, transparent 40%);
+    z-index: 0;
+  }
+
+  /* === HEADER === */
+  .topbar {
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    color: var(--seal-red);
+    background: var(--paper-pure);
+  }
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+  }
+  .countdown {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .countdown::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--seal-red);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  @media (max-width: 540px) {
+    .countdown { font-size: 10px; }
+  }
+
+  /* === HERO === */
+  .hero {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 24px 32px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--seal-red);
+    margin-bottom: 20px;
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--seal-red);
+    border-radius: 2px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 18px;
+    max-width: 18ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--seal-red);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(17px, 2vw, 21px);
+    font-style: italic;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* === CERTIFICATE === */
+  .stage {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .certificate-wrap {
+    perspective: 2000px;
+    padding: 32px 0;
+  }
+
+  .certificate {
+    background: var(--paper-pure);
+    aspect-ratio: 1.414 / 1; /* A4 landscape */
+    max-width: 880px;
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 56px);
+    position: relative;
+    box-shadow: 
+      0 1px 0 rgba(26, 22, 18, 0.04),
+      0 4px 16px rgba(26, 22, 18, 0.08),
+      0 20px 60px rgba(26, 22, 18, 0.12);
+    transform: rotate(-0.4deg);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    background-image: 
+      radial-gradient(circle at 0% 0%, rgba(168, 124, 46, 0.04) 0%, transparent 30%),
+      radial-gradient(circle at 100% 100%, rgba(168, 54, 42, 0.03) 0%, transparent 30%);
+  }
+  .certificate:hover {
+    transform: rotate(0deg) translateY(-4px);
+  }
+
+  /* Borda dupla decorativa */
+  .certificate::before {
+    content: '';
+    position: absolute;
+    inset: clamp(8px, 1.5vw, 16px);
+    border: 1.5px solid var(--ink);
+    pointer-events: none;
+  }
+  .certificate::after {
+    content: '';
+    position: absolute;
+    inset: clamp(14px, 2.5vw, 24px);
+    border: 0.5px solid var(--ink);
+    pointer-events: none;
+  }
+
+  .cert-inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: clamp(8px, 2vw, 20px);
+    z-index: 2;
+  }
+
+  .cert-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(8px, 1.1vw, 11px);
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-bottom: clamp(8px, 2vw, 18px);
+  }
+  .cert-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(20px, 4.2vw, 44px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: clamp(2px, 0.8vw, 6px);
+  }
+  .cert-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(11px, 1.6vw, 16px);
+    color: var(--seal-red);
+    margin-bottom: clamp(12px, 2.5vw, 24px);
+    letter-spacing: 0.04em;
+  }
+
+  .cert-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(11px, 1.7vw, 17px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    margin: 0 auto clamp(8px, 1.5vw, 14px);
+  }
+  .cert-recipient {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(22px, 4.8vw, 48px);
+    line-height: 1.1;
+    color: var(--ink);
+    margin: clamp(4px, 1vw, 10px) 0 clamp(10px, 2vw, 18px);
+    padding: 0 clamp(20px, 5vw, 50px) clamp(4px, 1vw, 8px);
+    border-bottom: 1px solid var(--ink);
+    display: inline-block;
+    transition: opacity 0.18s ease;
+  }
+  .cert-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(13px, 2.2vw, 22px);
+    color: var(--seal-red);
+    margin-bottom: clamp(10px, 2vw, 18px);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .cert-reason {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(11px, 1.5vw, 15px);
+    color: var(--ink-soft);
+    max-width: 50ch;
+    margin: 0 auto clamp(14px, 3vw, 24px);
+    line-height: 1.5;
+    transition: opacity 0.18s ease;
+  }
+
+  .cert-footer {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    padding-top: clamp(8px, 2vw, 16px);
+  }
+  .cert-sig {
+    text-align: center;
+    flex: 1;
+  }
+  .cert-sig-line {
+    font-family: 'Cormorant Garamond', cursive;
+    font-style: italic;
+    font-size: clamp(11px, 1.8vw, 18px);
+    color: var(--ink);
+    border-bottom: 0.5px solid var(--ink);
+    padding-bottom: 2px;
+    margin-bottom: 4px;
+    min-height: clamp(16px, 2.5vw, 24px);
+    transition: opacity 0.18s ease;
+  }
+  .cert-sig-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(7px, 0.9vw, 9px);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* Selo dourado */
+  .cert-seal {
+    flex-shrink: 0;
+    width: clamp(60px, 12vw, 110px);
+    height: clamp(60px, 12vw, 110px);
+    position: relative;
+    color: var(--seal-red);
+  }
+  .cert-seal svg {
+    width: 100%;
+    height: 100%;
+  }
+  .cert-seal .seal-rotating {
+    animation: rotate 30s linear infinite;
+    transform-origin: center;
+  }
+  @keyframes rotate {
+    to { transform: rotate(360deg); }
+  }
+  .cert-seal .seal-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(14px, 2.6vw, 26px);
+    color: var(--seal-red);
+  }
+
+  /* Metadata canto */
+  .cert-meta {
+    position: absolute;
+    top: clamp(20px, 3vw, 32px);
+    right: clamp(20px, 3vw, 32px);
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(7px, 0.95vw, 9px);
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    line-height: 1.6;
+  }
+  .cert-meta-left {
+    position: absolute;
+    top: clamp(20px, 3vw, 32px);
+    left: clamp(20px, 3vw, 32px);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(7px, 0.95vw, 9px);
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    line-height: 1.6;
+  }
+
+  /* === FORM === */
+  .editor {
+    max-width: 720px;
+    margin: 40px auto 0;
+    padding: 32px;
+    background: var(--paper-pure);
+    border: 1px solid var(--line);
+    position: relative;
+  }
+  .editor::before {
+    content: 'Personalize em tempo real';
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    background: var(--paper-pure);
+    padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 540px) {
+    .field-row { grid-template-columns: 1fr; }
+    .editor { padding: 24px 20px; }
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .field label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .field input, .field select, .field textarea {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid var(--ink);
+    padding: 8px 0;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    resize: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-bottom-color: var(--seal-red);
+  }
+  .field-full { grid-column: 1 / -1; }
+
+  .role-toggle {
+    display: flex;
+    gap: 0;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .role-toggle button {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--ink);
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .role-toggle button.active {
+    background: var(--ink);
+    color: var(--paper-pure);
+  }
+  .role-toggle button + button {
+    border-left: 1px solid var(--ink);
+  }
+
+  /* === CTA === */
+  .cta-section {
+    max-width: 720px;
+    margin: 40px auto 0;
+    text-align: center;
+    padding: 0 24px;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper-pure);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    box-shadow: 0 4px 0 var(--seal-red-dark), 0 8px 20px rgba(26, 22, 18, 0.15);
+    width: 100%;
+    max-width: 480px;
+  }
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 var(--seal-red-dark), 0 12px 28px rgba(26, 22, 18, 0.2);
+    background: var(--seal-red);
+  }
+  .cta-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--seal-red-dark);
+  }
+  .cta-price-strike {
+    text-decoration: line-through;
+    opacity: 0.5;
+    font-weight: 400;
+    margin-right: 8px;
+  }
+  .cta-micro {
+    margin-top: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .cta-micro span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cta-micro span::before {
+    content: '✓';
+    color: var(--stamp-green);
+    font-weight: 700;
+  }
+
+  /* === BENEFITS === */
+  .benefits {
+    max-width: 880px;
+    margin: 80px auto 0;
+    padding: 0 24px;
+  }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--seal-red);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    text-align: center;
+    color: var(--ink);
+    margin-bottom: 48px;
+    line-height: 1.1;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--seal-red);
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .benefit-item {
+    background: var(--paper);
+    padding: 28px 24px;
+    text-align: left;
+  }
+  .benefit-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--seal-red);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .benefit-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .benefit-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* === TESTIMONIALS === */
+  .testimonials {
+    max-width: 1100px;
+    margin: 100px auto 0;
+    padding: 0 24px;
+  }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .testimonial {
+    background: var(--paper-pure);
+    padding: 28px 24px;
+    border-left: 2px solid var(--seal-red);
+    position: relative;
+  }
+  .testimonial-stamp {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--stamp-green);
+    border: 1px solid var(--stamp-green);
+    padding: 2px 6px;
+    letter-spacing: 0.1em;
+    transform: rotate(3deg);
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .testimonial-author {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* === FAQ === */
+  .faq {
+    max-width: 720px;
+    margin: 100px auto 0;
+    padding: 0 24px;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+  .faq-q {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px;
+    color: var(--ink);
+    padding: 24px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    list-style: none;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::after {
+    content: '+';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--seal-red);
+    transition: transform 0.2s;
+    line-height: 1;
+  }
+  details[open] .faq-q::after {
+    transform: rotate(45deg);
+  }
+  .faq-a {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    padding: 0 0 24px;
+    max-width: 60ch;
+  }
+
+  /* === FINAL CTA === */
+  .final-cta {
+    max-width: 880px;
+    margin: 100px auto 0;
+    padding: 60px 24px;
+    text-align: center;
+    background: var(--paper-pure);
+    border: 1px solid var(--line);
+    position: relative;
+  }
+  .final-cta::before, .final-cta::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--seal-red);
+  }
+  .final-cta::before {
+    top: -1px; left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .final-cta::after {
+    bottom: -1px; right: -1px;
+    border-left: none;
+    border-top: none;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    margin-top: 100px;
+    padding: 40px 24px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .footer-disclaimer {
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    margin-top: 12px;
+    color: var(--ink-soft);
+    opacity: 0.7;
+  }
+
+  /* === SUCCESS STATE === */
+  .success-banner {
+    background: var(--stamp-green);
+    color: var(--paper-pure);
+    padding: 16px 24px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: none;
+  }
+  body.success-mode .success-banner { display: block; }
+  body.success-mode .hide-on-success { display: none; }
+  body.success-mode .show-on-success { display: block; }
+  .show-on-success { display: none; }
+
+  .download-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .download-btn {
+    flex: 1;
+    min-width: 200px;
+    max-width: 240px;
+    background: var(--ink);
+    color: var(--paper-pure);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .download-btn:hover {
+    background: var(--seal-red);
+    transform: translateY(-2px);
+  }
+  .download-btn.secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  .download-btn.secondary:hover {
+    background: var(--ink);
+    color: var(--paper-pure);
+  }
+
+  /* === ANIMATIONS === */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Banner sucesso (aparece após pagamento) -->
+<div class="success-banner">
+  ✓ Pagamento confirmado — seu certificado está pronto pra download
+</div>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">❦</div>
+      <div class="brand-name">Cartório do Amor · est. 2026</div>
+    </div>
+    <div class="countdown" id="countdown">12 DE JUNHO · EM 3 DIAS</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero hide-on-success">
+  <div class="eyebrow">Edição Dia dos Namorados 2026 · Tiragem limitada</div>
+  <h1>Certificado Oficial <em>de Melhor</em> Namorada(o)</h1>
+  <p class="hero-sub">Prova material que ela(e) é insubstituível. Reconhecido pelo Cartório do Amor desde 2026 — agora em edição comemorativa do dia 12.</p>
+</section>
+
+<section class="hero show-on-success">
+  <div class="eyebrow" style="background: var(--stamp-green); color: var(--paper-pure); border-color: var(--stamp-green);">✓ Confirmado · Nº <span id="cert-number-display">000000</span></div>
+  <h1>Seu certificado <em>está pronto.</em></h1>
+  <p class="hero-sub">Confere se está tudo certo abaixo e baixa nos formatos que quiser. Sem pressa — fica salvo no seu e-mail também.</p>
+</section>
+
+<!-- CERTIFICATE PREVIEW -->
+<div class="stage">
+  <div class="certificate-wrap">
+    <div class="certificate" id="certificate">
+      <div class="cert-meta-left">
+        Nº <span id="cert-number">042831</span><br>
+        TIPO: 02/A
+      </div>
+      <div class="cert-meta">
+        EMISSÃO<br>
+        <span id="cert-date">12.06.2026</span>
+      </div>
+
+      <div class="cert-inner">
+        <div class="cert-header">— República dos Apaixonados —</div>
+        <div class="cert-title">CERTIFICADO</div>
+        <div class="cert-subtitle">de mérito vitalício em relacionamento</div>
+
+        <div class="cert-body">
+          Certifica-se, por meio deste instrumento, que
+        </div>
+
+        <div class="cert-recipient" id="preview-name">Sua Pessoa</div>
+
+        <div class="cert-body">foi oficialmente reconhecida(o) como</div>
+
+        <div class="cert-role" id="preview-role">a Melhor Namorada do Mundo</div>
+
+        <div class="cert-reason" id="preview-reason">
+          "pelos motivos que só nós dois sabemos — e por todos os outros também."
+        </div>
+
+        <div class="cert-footer">
+          <div class="cert-sig">
+            <div class="cert-sig-line" id="preview-signer">Você</div>
+            <div class="cert-sig-label">Assinatura · Outorgante</div>
+          </div>
+
+          <div class="cert-seal">
+            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <path id="circle-text" d="M 60,60 m -45,0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" />
+              </defs>
+              <g class="seal-rotating">
+                <circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" stroke-width="1"/>
+                <circle cx="60" cy="60" r="48" fill="none" stroke="currentColor" stroke-width="0.5"/>
+                <text font-family="JetBrains Mono, monospace" font-size="6.5" letter-spacing="2" fill="currentColor">
+                  <textPath href="#circle-text" startOffset="0%">
+                    CARTÓRIO DO AMOR · REPÚBLICA DOS APAIXONADOS · 2026 · 
+                  </textPath>
+                </text>
+              </g>
+              <circle cx="60" cy="60" r="32" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="60" y="58" font-family="DM Serif Display, serif" font-size="14" text-anchor="middle" fill="currentColor">VÁLIDO</text>
+              <text x="60" y="72" font-family="DM Serif Display, serif" font-style="italic" font-size="10" text-anchor="middle" fill="currentColor">por toda a vida</text>
+            </svg>
+          </div>
+
+          <div class="cert-sig">
+            <div class="cert-sig-line" style="font-family: 'Cormorant Garamond', cursive; font-style: italic;">Cupido &amp; Cia.</div>
+            <div class="cert-sig-label">Cartório Emitente</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDITOR FORM -->
+  <div class="editor">
+    <div class="field-row">
+      <div class="field">
+        <label for="input-name">Nome dela(e)</label>
+        <input type="text" id="input-name" maxlength="40" placeholder="Ex: Maria Fernanda" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="input-signer">Quem está assinando (você)</label>
+        <input type="text" id="input-signer" maxlength="30" placeholder="Ex: João" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="field field-full" style="margin-bottom: 16px;">
+      <label>Que título dar?</label>
+      <div class="role-toggle" id="role-toggle">
+        <button data-role="a Melhor Namorada do Mundo" class="active">Namorada</button>
+        <button data-role="o Melhor Namorado do Mundo">Namorado</button>
+        <button data-role="a Melhor Esposa do Mundo">Esposa</button>
+        <button data-role="o Melhor Esposo do Mundo">Esposo</button>
+      </div>
+    </div>
+
+    <div class="field field-full">
+      <label for="input-reason">Motivo (uma frase) — opcional</label>
+      <textarea id="input-reason" maxlength="140" rows="2" placeholder='Ex: "por aguentar meus rolês e ainda rir das minhas piadas ruins"'></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- CTA (antes do pagamento) -->
+<div class="cta-section hide-on-success">
+  <a href="#" class="cta-button" id="cta-main">
+    <span class="cta-price-strike">R$ 29,90</span>Emitir meu certificado · R$ 14,90
+  </a>
+  <div class="cta-micro">
+    <span>Pix instantâneo</span>
+    <span>PDF no e-mail em segundos</span>
+    <span>Versão pro story do Insta</span>
+  </div>
+</div>
+
+<!-- CTA (após pagamento) -->
+<div class="cta-section show-on-success">
+  <div class="download-actions">
+    <button class="download-btn" id="download-pdf">Baixar PDF (A4)</button>
+    <button class="download-btn secondary" id="download-story">Baixar pro story (1080)</button>
+  </div>
+  <div class="cta-micro" style="margin-top: 24px;">
+    <span>Edite os campos acima e clique em baixar de novo se quiser ajustar</span>
+  </div>
+</div>
+
+<!-- BENEFITS -->
+<section class="benefits hide-on-success">
+  <div class="section-eyebrow">O que está incluso</div>
+  <h2 class="section-title">Tudo pronto em <em>menos de 30 segundos</em></h2>
+  
+  <div class="benefits-grid">
+    <div class="benefit-item">
+      <div class="benefit-num">01</div>
+      <div class="benefit-title">PDF em alta resolução</div>
+      <div class="benefit-desc">Pronto pra imprimir em A4, A3 ou colar na geladeira. Qualidade de cartório de verdade.</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-num">02</div>
+      <div class="benefit-title">Versão pro story</div>
+      <div class="benefit-desc">Imagem quadrada 1080×1080 otimizada pro Instagram, WhatsApp e qualquer feed.</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-num">03</div>
+      <div class="benefit-title">100% personalizável</div>
+      <div class="benefit-desc">Nome, papel, motivo, assinatura. Tudo seu — nada de modelo igual ao do vizinho.</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-num">04</div>
+      <div class="benefit-title">Emissão imediata</div>
+      <div class="benefit-desc">Paga via Pix e baixa na hora. Sem espera, sem ficar refrescando e-mail.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials hide-on-success">
+  <div class="section-eyebrow">Testemunhas oficiais</div>
+  <h2 class="section-title">Reações <em>registradas em ata</em></h2>
+  
+  <div class="testimonial-grid">
+    <div class="testimonial">
+      <div class="testimonial-stamp">PROC. 003</div>
+      <div class="testimonial-text">"Ela chorou. Tipo, chorou de verdade. Achei que ia ser brincadeira e virou a coisa mais fofa que já dei."</div>
+      <div class="testimonial-author">Lucas, 27 — Curitiba</div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-stamp">PROC. 017</div>
+      <div class="testimonial-text">"Mandei imprimir num porta-retrato dourado e coloquei na mesa de cabeceira dele. Foi o melhor R$ 15 da minha vida."</div>
+      <div class="testimonial-author">Marina, 31 — Belo Horizonte</div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-stamp">PROC. 042</div>
+      <div class="testimonial-text">"Postei no story junto com a foto do nosso jantar e meus amigos surtaram. Três deles compraram um igual no mesmo dia."</div>
+      <div class="testimonial-author">Rafael, 24 — São Paulo</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq hide-on-success">
+  <div class="section-eyebrow">Perguntas frequentes</div>
+  <h2 class="section-title">Antes de você <em>perguntar</em></h2>
+  
+  <details class="faq-item">
+    <summary class="faq-q">É uma piada ou tem valor de verdade?</summary>
+    <div class="faq-a">As duas coisas. É um presente afetivo com cara de documento oficial — e funciona exatamente por isso. O tom é leve, mas a entrega é caprichada: design impresso de cartório real, papel digital em alta, pronto pra emoldurar.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">Em quanto tempo eu recebo?</summary>
+    <div class="faq-a">Na hora. Você paga via Pix, é redirecionado de volta pra esta página, e baixa o PDF e a versão pro story na mesma tela. Uma cópia também vai pro seu e-mail automaticamente.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">Posso editar depois de pagar?</summary>
+    <div class="faq-a">Pode. Os campos continuam editáveis nesta página depois do pagamento — você baixa quantas versões quiser, com o texto que quiser.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">E se eu não gostar?</summary>
+    <div class="faq-a">7 dias de garantia. Manda um Pix de volta no nosso WhatsApp e devolvemos o valor sem perguntas. Mas até agora ninguém pediu.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">Vale pra outras pessoas além de namorada(o)?</summary>
+    <div class="faq-a">Vale. Esposa, marido, ficante oficial, melhor amiga, mãe, sogra que você gosta de verdade — basta trocar o título no editor. O certificado é seu, faça dele o que quiser.</div>
+  </details>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta hide-on-success">
+  <div class="section-eyebrow">Última chamada</div>
+  <h2 class="section-title" style="margin-bottom: 24px;">Faltam <em>3 dias</em>.</h2>
+  <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--ink-soft); max-width: 50ch; margin: 0 auto 32px;">
+    Você pode passar 40 minutos procurando um presente na shopee, ou resolver isso agora em 30 segundos. Sua decisão.
+  </p>
+  <a href="#" class="cta-button" id="cta-final">
+    Emitir meu certificado · R$ 14,90
+  </a>
+  <div class="cta-micro" style="margin-top: 14px;">
+    <span>Pagamento por Pix</span>
+    <span>Entrega imediata</span>
+    <span>7 dias de garantia</span>
+  </div>
+</section>
+
+<footer class="footer">
+  Cartório do Amor — emitindo provas oficiais de afeto desde 2026.<br>
+  <div class="footer-disclaimer">DOC. SEM VALOR JURÍDICO · 100% VALOR EMOCIONAL · GARANTIA 7 DIAS</div>
+</footer>
+
+<script>
+  // ========================
+  // CONFIGURAÇÃO — EDITAR AQUI
+  // ========================
+  const CAKTO_URL = 'https://pay.cakto.com.br/k4huvkc_920326';
+  const SUCCESS_PARAM = 'status'; // Param que a Cakto envia na URL de retorno
+  const SUCCESS_VALUE = 'success'; // Valor que indica pagamento confirmado
+  // ========================
+
+  // Elementos do certificado
+  const elPreviewName = document.getElementById('preview-name');
+  const elPreviewSigner = document.getElementById('preview-signer');
+  const elPreviewRole = document.getElementById('preview-role');
+  const elPreviewReason = document.getElementById('preview-reason');
+  const elCertNumber = document.getElementById('cert-number');
+  const elCertNumberDisplay = document.getElementById('cert-number-display');
+  const elCertDate = document.getElementById('cert-date');
+
+  // Inputs
+  const inputName = document.getElementById('input-name');
+  const inputSigner = document.getElementById('input-signer');
+  const inputReason = document.getElementById('input-reason');
+  const roleToggle = document.getElementById('role-toggle');
+
+  // Estado
+  let state = {
+    name: '',
+    signer: '',
+    reason: '',
+    role: 'a Melhor Namorada do Mundo'
+  };
+
+  // Gera número de série pseudo-aleatório baseado em timestamp
+  function generateCertNumber() {
+    const base = Date.now().toString().slice(-5);
+    const rand = Math.floor(Math.random() * 90 + 10);
+    return `0${rand}${base}`.slice(0, 6);
+  }
+
+  // Data formatada
+  function getFormattedDate() {
+    const d = new Date();
+    return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
+  }
+
+  // Atualiza o certificado em tempo real
+  function updateCertificate() {
+    elPreviewName.textContent = state.name || 'Sua Pessoa';
+    elPreviewSigner.textContent = state.signer || 'Você';
+    elPreviewRole.textContent = state.role;
+    elPreviewReason.textContent = state.reason
+      ? `"${state.reason}"`
+      : '"pelos motivos que só nós dois sabemos — e por todos os outros também."';
+    
+    // Salva no localStorage pra recuperar após o pagamento
+    localStorage.setItem('cartorio_state', JSON.stringify(state));
+  }
+
+  // Inputs reagem em tempo real
+  inputName.addEventListener('input', e => {
+    state.name = e.target.value.trim();
+    updateCertificate();
+  });
+  inputSigner.addEventListener('input', e => {
+    state.signer = e.target.value.trim();
+    updateCertificate();
+  });
+  inputReason.addEventListener('input', e => {
+    state.reason = e.target.value.trim();
+    updateCertificate();
+  });
+
+  // Toggle de papel
+  roleToggle.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      roleToggle.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.role = btn.dataset.role;
+      updateCertificate();
+    });
+  });
+
+  // CTAs — redireciona pra Cakto
+  function goToCheckout() {
+    // Garante que o estado está salvo
+    localStorage.setItem('cartorio_state', JSON.stringify(state));
+    // Salva número e data pra usar no retorno
+    if (!localStorage.getItem('cartorio_number')) {
+      localStorage.setItem('cartorio_number', generateCertNumber());
+    }
+    localStorage.setItem('cartorio_date', getFormattedDate());
+    window.location.href = CAKTO_URL;
+  }
+  document.getElementById('cta-main').addEventListener('click', e => {
+    e.preventDefault();
+    goToCheckout();
+  });
+  document.getElementById('cta-final').addEventListener('click', e => {
+    e.preventDefault();
+    goToCheckout();
+  });
+
+  // ========================
+  // RECUPERAÇÃO DE ESTADO E MODO SUCCESS
+  // ========================
+  const urlParams = new URLSearchParams(window.location.search);
+  const isSuccess = urlParams.get(SUCCESS_PARAM) === SUCCESS_VALUE;
+
+  // Recupera dados salvos (independente de sucesso, pra UX consistente)
+  try {
+    const saved = JSON.parse(localStorage.getItem('cartorio_state'));
+    if (saved) {
+      state = { ...state, ...saved };
+      inputName.value = state.name;
+      inputSigner.value = state.signer;
+      inputReason.value = state.reason;
+      // Restaura toggle ativo
+      roleToggle.querySelectorAll('button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.role === state.role);
+      });
+    }
+  } catch (e) { /* ignore */ }
+
+  // Define número e data
+  const certNumber = localStorage.getItem('cartorio_number') || generateCertNumber();
+  const certDate = localStorage.getItem('cartorio_date') || getFormattedDate();
+  elCertNumber.textContent = certNumber;
+  elCertNumberDisplay.textContent = certNumber;
+  elCertDate.textContent = certDate;
+
+  updateCertificate();
+
+  // Ativa modo success
+  if (isSuccess) {
+    document.body.classList.add('success-mode');
+    // Salva flag de comprado (caso o usuário recarregue sem o param)
+    localStorage.setItem('cartorio_paid', '1');
+    // Scroll suave pro certificado
+    setTimeout(() => {
+      document.querySelector('.certificate-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  } else if (localStorage.getItem('cartorio_paid') === '1') {
+    // Se já comprou antes, mantém o modo success
+    document.body.classList.add('success-mode');
+  }
+
+  // ========================
+  // GERAÇÃO DE PDF E IMAGEM
+  // ========================
+  async function captureCertificate(scale = 2.5) {
+    const cert = document.getElementById('certificate');
+    // Remove rotação temporariamente pra capturar reto
+    const originalTransform = cert.style.transform;
+    cert.style.transform = 'rotate(0deg)';
+    
+    const canvas = await html2canvas(cert, {
+      scale: scale,
+      backgroundColor: '#FBF7EC',
+      useCORS: true,
+      logging: false
+    });
+    
+    cert.style.transform = originalTransform;
+    return canvas;
+  }
+
+  const btnPDF = document.getElementById('download-pdf');
+  const btnStory = document.getElementById('download-story');
+
+  if (btnPDF) {
+    btnPDF.addEventListener('click', async () => {
+      btnPDF.textContent = 'Gerando...';
+      btnPDF.disabled = true;
+      try {
+        const canvas = await captureCertificate(2.5);
+        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+        
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+          orientation: 'landscape',
+          unit: 'mm',
+          format: 'a4'
+        });
+        
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+        
+        const fileName = `certificado-${(state.name || 'meu-amor').replace(/[^a-z0-9]/gi, '-').toLowerCase()}.pdf`;
+        pdf.save(fileName);
+        btnPDF.textContent = 'Baixar PDF (A4)';
+      } catch (err) {
+        console.error(err);
+        btnPDF.textContent = 'Erro — tente de novo';
+      } finally {
+        btnPDF.disabled = false;
+      }
+    });
+  }
+
+  if (btnStory) {
+    btnStory.addEventListener('click', async () => {
+      btnStory.textContent = 'Gerando...';
+      btnStory.disabled = true;
+      try {
+        const canvas = await captureCertificate(2.5);
+        
+        // Cria canvas quadrado 1080x1080 com fundo
+        const squareCanvas = document.createElement('canvas');
+        squareCanvas.width = 1080;
+        squareCanvas.height = 1080;
+        const ctx = squareCanvas.getContext('2d');
+        
+        // Fundo
+        ctx.fillStyle = '#F2EBD9';
+        ctx.fillRect(0, 0, 1080, 1080);
+        
+        // Desenha o certificado centralizado e dimensionado
+        const certRatio = canvas.width / canvas.height;
+        const targetWidth = 980;
+        const targetHeight = targetWidth / certRatio;
+        const offsetX = (1080 - targetWidth) / 2;
+        const offsetY = (1080 - targetHeight) / 2;
+        
+        ctx.drawImage(canvas, offsetX, offsetY, targetWidth, targetHeight);
+        
+        // Download
+        const link = document.createElement('a');
+        link.download = `certificado-story-${(state.name || 'meu-amor').replace(/[^a-z0-9]/gi, '-').toLowerCase()}.jpg`;
+        link.href = squareCanvas.toDataURL('image/jpeg', 0.95);
+        link.click();
+        
+        btnStory.textContent = 'Baixar pro story (1080)';
+      } catch (err) {
+        console.error(err);
+        btnStory.textContent = 'Erro — tente de novo';
+      } finally {
+        btnStory.disabled = false;
+      }
+    });
+  }
+
+  // ========================
+  // COUNTDOWN PRO DIA 12
+  // ========================
+  function updateCountdown() {
+    const now = new Date();
+    const target = new Date(now.getFullYear(), 5, 12); // 12 de junho (mês 5 = junho)
+    if (now > target) target.setFullYear(target.getFullYear() + 1);
+    const diff = target - now;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const el = document.getElementById('countdown');
+    if (days === 0) {
+      el.textContent = 'HOJE É 12 DE JUNHO · ÚLTIMAS HORAS';
+    } else if (days === 1) {
+      el.textContent = '12 DE JUNHO · AMANHÃ';
+    } else {
+      el.textContent = `12 DE JUNHO · EM ${days} DIAS`;
+    }
+  }
+  updateCountdown();
+</script>
+
+</body>
+</html>
