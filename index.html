@@ -304,9 +304,10 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     gap: 20px;
     padding-top: clamp(8px, 2vw, 16px);
+    padding-bottom: clamp(4px, 1vw, 10px);
   }
   .cert-sig {
     text-align: center;
@@ -319,8 +320,8 @@
     color: var(--ink);
     border-bottom: 0.5px solid var(--ink);
     padding-bottom: 2px;
-    margin-bottom: 4px;
-    min-height: clamp(16px, 2.5vw, 24px);
+    margin-bottom: 6px;
+    min-height: clamp(20px, 3vw, 28px);
     transition: opacity 0.18s ease;
   }
   .cert-sig-label {
@@ -334,8 +335,8 @@
   /* Selo dourado */
   .cert-seal {
     flex-shrink: 0;
-    width: clamp(60px, 12vw, 110px);
-    height: clamp(60px, 12vw, 110px);
+    width: clamp(54px, 10vw, 92px);
+    height: clamp(54px, 10vw, 92px);
     position: relative;
     color: var(--seal-red);
   }
